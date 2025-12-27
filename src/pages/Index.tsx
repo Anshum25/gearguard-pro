@@ -1,13 +1,49 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import LoadingScreen from "@/components/LoadingScreen";
+import Navbar from "@/components/landing/Navbar";
+import HeroSection from "@/components/landing/HeroSection";
+import ProblemSection from "@/components/landing/ProblemSection";
+import SolutionSection from "@/components/landing/SolutionSection";
+import FeaturesSection from "@/components/landing/FeaturesSection";
+import HowItWorksSection from "@/components/landing/HowItWorksSection";
+import ImpactSection from "@/components/landing/ImpactSection";
+import BuiltForOdooSection from "@/components/landing/BuiltForOdooSection";
+import PreviewSection from "@/components/landing/PreviewSection";
+import CTASection from "@/components/landing/CTASection";
+import Footer from "@/components/landing/Footer";
 
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <LoadingScreen onComplete={() => setIsLoading(false)} />
+        )}
+      </AnimatePresence>
+
+      {!isLoading && (
+        <main className="min-h-screen bg-background">
+          <Navbar />
+          <div id="hero">
+            <HeroSection />
+          </div>
+          <ProblemSection />
+          <SolutionSection />
+          <FeaturesSection />
+          <HowItWorksSection />
+          <ImpactSection />
+          <BuiltForOdooSection />
+          <div id="preview">
+            <PreviewSection />
+          </div>
+          <CTASection />
+          <Footer />
+        </main>
+      )}
+    </>
   );
 };
 
